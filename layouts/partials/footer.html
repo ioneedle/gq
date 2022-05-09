@@ -1,0 +1,47 @@
+<footer class="common-footer">
+    {{ $languagesCount := $.Site.Home.AllTranslations }}
+    {{ if gt $languagesCount 1 }}
+        {{ partial "language-switcher.html" . }}
+    {{ end }}
+
+    <div class="common-footer-bottom">
+        {{ if .Site.Menus.footer }}
+            {{ $currentPage := . }}
+            <ul class="footer-menu">
+            {{ range .Site.Menus.footer }}
+            <li><a class="{{if or ($currentPage.IsMenuCurrent "footer" .) ($currentPage.HasMenuCurrent "footer" .) }} active{{end}}" href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a></li>
+            {{ end }}
+            </ul>
+        {{ end }}
+        <div class="copyright">
+            <p>
+              <!--[if lte IE 8]>
+              <span style="
+                 filter: progid:DXImageTransform.Microsoft.BasicImage( rotation=2 );
+                 display: inline-block;
+              ">
+              <![endif]-->
+              <span style="
+                 -webkit-transform: scaleX(-1);
+                    -moz-transform: scaleX(-1);
+                      -o-transform: scaleX(-1);
+                  -khtml-transform: scaleX(-1);
+                     -ms-transform: scaleX(-1);
+                         transform: scaleX(-1);
+                 display: inline-block;
+              ">
+              	&copy;
+              </span> ALL WRONGS RESERVED
+
+              <!--[if lte IE 8]>
+              </span>
+              <![endif]--><br>
+              {{ partial "footer-extra.html" . }}
+            </p>
+        </div>
+
+        {{ partial "theme-switcher.html" . }}
+    </div>
+
+    {{ partial "h-card.html" . }}
+</footer>
